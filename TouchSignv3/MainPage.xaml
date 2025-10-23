@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TouchSignv3.MainPage"
+             BackgroundColor="White">
+
+    <VerticalStackLayout Background="White">
+        <Button Text="Modo Aprendizaje"
+                Clicked="GoToSecondPage_Clicked"
+                BackgroundColor="#007AFF"
+                TextColor="White"
+                Margin="10,0"
+                HorizontalOptions="Center"/>
+
+        <Grid ColumnDefinitions="Auto,*,Auto"
+              Padding="10"
+              VerticalOptions="Start">
+
+            <Image Source="sonido.png"
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   VerticalOptions="Center"
+                   Grid.Column="0"/>
+
+            <BoxView Grid.Column="1" BackgroundColor="White"/>
+
+            <Image Source="traduccion.png" 
+                   WidthRequest="50"
+                   HeightRequest="50"
+                   VerticalOptions="Center"
+                   Grid.Column="2"/>
+        </Grid>
+
+        <ScrollView HeightRequest="200" WidthRequest="500">
+            <Border
+                 HeightRequest="200"
+        WidthRequest="400"
+        Background="#DFE9F5"
+        Stroke="Black"
+        StrokeThickness="1"
+        Padding="10"
+        HorizontalOptions="Center"
+        VerticalOptions="Start">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="100,0,0,100" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout x:Name="MessagesContainer"
+                                    Spacing="8"
+                             Padding="10"
+                                     BackgroundColor="#DFE9F5" />
+            </Border>
+        </ScrollView>
+
+        <Grid RowSpacing="5" ColumnSpacing="5" Padding="10" Margin="0,180,0,0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Entry x:Name="TxtDisplay"
+                   Grid.Row="0"
+                   Placeholder="Escribe..."
+                   FontSize="24"
+                   IsReadOnly="True"
+                   BackgroundColor="white"
+                   TextColor="Black"
+                   HeightRequest="50"/>
+
+            <Grid Grid.Row="1"
+                  VerticalOptions="Start"
+                  HeightRequest="400">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Primera fila: Q - P -->
+                <ImageButton x:Name="BtnQ"  Grid.Row="0" Grid.Column="0" Source="q.png"  StyleId="Q" Clicked="Letter_Clicked"  />
+                <ImageButton x:Name="BtnW" Grid.Row="0" Grid.Column="1" Source="w.png" StyleId="W" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnE" Grid.Row="0" Grid.Column="2" Source="e.png" StyleId="E" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnR" Grid.Row="0" Grid.Column="3" Source="r.png" StyleId="R" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnT" Grid.Row="0" Grid.Column="4" Source="t.png" StyleId="T" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnY" Grid.Row="0" Grid.Column="5" Source="y.png" StyleId="Y" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnU" Grid.Row="0" Grid.Column="6" Source="u.png" StyleId="U" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnI" Grid.Row="0" Grid.Column="7" Source="i.png" StyleId="I" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnO" Grid.Row="0" Grid.Column="8" Source="o.png" StyleId="O" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnP" Grid.Row="0" Grid.Column="9" Source="p.png" StyleId="P" Clicked="Letter_Clicked"/>
+
+                <!-- Segunda fila: A - L -->
+                <ImageButton x:Name="BtnA" Grid.Row="1" Grid.Column="0" Source="a.png" StyleId="A" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnS" Grid.Row="1" Grid.Column="1" Source="s.png" StyleId="S" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnD" Grid.Row="1" Grid.Column="2" Source="d.png" StyleId="D" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnF" Grid.Row="1" Grid.Column="3" Source="f.png" StyleId="F" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnG" Grid.Row="1" Grid.Column="4" Source="g.png" StyleId="G" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnH" Grid.Row="1" Grid.Column="5" Source="h.png" StyleId="H" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnJ" Grid.Row="1" Grid.Column="6" Source="j.png" StyleId="J" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnK" Grid.Row="1" Grid.Column="7" Source="k.png" StyleId="K" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnL" Grid.Row="1" Grid.Column="8" Source="l.png" StyleId="L" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnDelete" Grid.Row="1" Grid.Column="9" Grid.ColumnSpan="3" Source="borrar.png" Clicked="Delete_Clicked" HeightRequest="30"/>
+
+                <!-- Tercera fila: Z - M -->
+                <ImageButton x:Name="BtnZ" Grid.Row="2" Grid.Column="1" Source="z.png" StyleId="Z" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnX" Grid.Row="2" Grid.Column="2" Source="x.png" StyleId="X" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnC" Grid.Row="2" Grid.Column="3" Source="c.png" StyleId="C" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnV" Grid.Row="2" Grid.Column="4" Source="v.png" StyleId="V" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnB" Grid.Row="2" Grid.Column="5" Source="b.png" StyleId="B" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnN" Grid.Row="2" Grid.Column="6" Source="n.png" StyleId="N" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnM" Grid.Row="2" Grid.Column="7" Source="m.png" StyleId="M" Clicked="Letter_Clicked"/>
+                <ImageButton x:Name="BtnEnter" Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="2" Source="intro.png" Clicked="Enter_Clicked" WidthRequest="30" HeightRequest="30"/>
+
+                <!-- Cuarta fila: Espacio, Borrar, Intro -->
+                <Button x:Name="BtnSpace" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4" Text="Espacio" Clicked="Space_Clicked" WidthRequest="200" HorizontalOptions="Start" HeightRequest="10" />
+            </Grid>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
