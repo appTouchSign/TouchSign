@@ -1,0 +1,134 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Maui.Controls;
+
+namespace TuNamespace
+{
+    public partial class MainPage : ContentPage
+    {
+        Random rnd = new Random();
+
+        // Diccionario: letra → seña (imagen nombre)
+        Dictionary<string,string> pares = new Dictionary<string,string>()
+        {
+            { "A", "A_sena.png" },
+            { "B", "B_sena.png" },
+            { "C", "C_sena.png" },
+            { "D", "D_sena.png" },
+            // agrega más según tus imágenes
+        };
+
+        // Ruta de letras como imagen si las tienes, o podrías usar texto para letra
+        Dictionary<string,string> letraImagen = new Dictionary<string,string>()
+        {
+            { "A", "A_letra.png" },
+            { "B", "B_letra.png" },
+            { "C", "C_letra.png" },
+            { "D", "D_letra.png" },
+        };
+
+        string respuestaCorrecta;
+        bool mostrarLetra;
+
+        public MainPage()
+        {
+            InitializeComponent();
+            NuevaRonda();
+        }
+
+        void NuevaRonda()
+        {
+            lblResultado.Text = "";
+
+            // Decide aleatoriamente: mostrar letra (texto o imagen) o seña
+            mostrarLetra = rnd.Next(2) == 0;
+
+            // Escoger un par aleatorio
+            var par = pares.ElementAt(rnd.Next(pares.Count));
+            string letra = par.Key;
+            string senaImagen = par.Value;
+
+            if (mostrarLetra)
+            {
+                // Mostrar la letra (podría ser imagen de la letra o simplemente texto)
+                // Aquí uso imagen de letra
+                imgPregunta.Source = letraImagen[letra];
+                respuestaCorrecta = senaImagen;
+            }
+            else
+            {
+                // Mostrar la imagen de la seña
+                imgPregunta.Source = senaImagen;
+                respuestaCorrecta = letra;  // la letra (texto) es la respuesta
+            }
+
+            // Crear opciones
+            List<string> opciones = new List<string>();
+            opciones.Add(respuestaCorrecta);
+
+            while (opciones.Count < 4)
+            {
+                var otro = pares.ElementAt(rnd.Next(pares.Count));
+                if (mostrarLetra)
+                {
+                    // Añadimos otras señas
+                    if (!opciones.Contains(otro.Value))
+                        opciones.Add(otro.Value);
+                }
+                else
+                {
+                    // Añadimos otras letras
+                    if (!opciones.Contains(otro.Key))
+                        opciones.Add(otro.Key);
+                }
+            }
+
+            opciones = opciones.OrderBy(x => rnd.Next()).ToList();
+
+            // Asignar a botones
+            Button[] botones = { btnOpcion1, btnOpcion2, btnOpcion3, btnOpcion4 };
+            for (int i = 0; i < botones.Length; i++)
+            {
+                botones[i].BindingContext = opciones[i];
+
+                if (mostrarLetra)
+                {
+                    // opciones son imágenes de señas
+                    botones[i].Text = "";  // si quieres, quitas texto
+                    botones[i].ImageSource = opciones[i];
+                }
+                else
+                {
+                    // opciones son letras
+                    botones[i].ImageSource = null;
+                    botones[i].Text = opciones[i];
+                }
+            }
+        }
+
+        void Opcion_Clicked(object sender, EventArgs e)
+        {
+            var btn = (Button)sender;
+            string seleccion = btn.BindingContext as string;
+
+            if (seleccion == respuestaCorrecta)
+            {
+                lblResultado.Text = "✅ Correcto!";
+                lblResultado.TextColor = Colors.Green;
+            }
+            else
+            {
+                lblResultado.Text = "❌ Incorrecto";
+                lblResultado.TextColor = Colors.Red;
+            }
+
+            // Esperar un poco y luego nueva ronda
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                NuevaRonda();
+                return false; // ejecuta una vez
+            });
+        }
+    }
+}

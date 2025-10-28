@@ -1,0 +1,37 @@
+xml version=1.0 encoding=utf-8 
+ContentPage  
+    xmlns=httpschemas.microsoft.comdotnet2021maui  
+    xmlnsx=httpschemas.microsoft.comwinfx2009xaml  
+    xClass=TuNamespace.MainPage
+
+    VerticalStackLayout  
+        Padding=20  
+        Spacing=20
+        VerticalOptions=Center
+
+        !-- Imagen o letra de la pregunta --
+        Image xName=imgPregunta  
+               HeightRequest=200  
+               Aspect=AspectFit 
+
+        !-- Alternativamente podrías usar un Label si es letra en vez de imagen --
+        !--Label xName=lblPregunta  
+               FontSize=96  
+               HorizontalOptions=Center  
+               VerticalOptions=Center --
+
+        !-- Opciones de botones --
+        Grid ColumnDefinitions=, RowDefinitions=Auto,Auto  
+              ColumnSpacing=10 RowSpacing=10
+            Button xName=btnOpcion1 Clicked=Opcion_Clicked 
+            Button xName=btnOpcion2 Clicked=Opcion_Clicked Grid.Column=1 
+            Button xName=btnOpcion3 Clicked=Opcion_Clicked Grid.Row=1 
+            Button xName=btnOpcion4 Clicked=Opcion_Clicked Grid.Row=1 Grid.Column=1 
+        Grid
+
+        !-- Resultado --
+        Label xName=lblResultado  
+               FontSize=24  
+               HorizontalOptions=Center 
+    VerticalStackLayout
+ContentPage
